@@ -1,0 +1,5 @@
+# Install only what you need based on which runtime you're testing:
+# MLX:        pip install mlx-lm
+# LiteRT-LM:  pip install litert-lm-api
+# Ollama:     pip install requests  (+ install Ollama from https://ollama.com)
+rich>=13.0.0
