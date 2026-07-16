@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="docs/banner.png" width="900px" alt="Awesome On-Device AI">
-</p>
-
-<p align="center">
   <a href="https://www.linkedin.com/in/shreelaxmi-ganesh/">
     <img src="https://img.shields.io/badge/Follow%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
@@ -239,10 +235,6 @@ Every product decision was mine: which templates to build, why TF-IDF over a vec
 <p>Created and maintained by <a href="https://www.linkedin.com/in/shreelaxmi-ganesh/"><strong>Shreelaxmi Ganesh</strong></a> — PM in on-device AI, ex-Samsung Research (Galaxy AI · Patent WO2025/063733 · File Cache Reclamation for GenAI on Mobile NPUs).</p>
 
 ---
-
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=shreelaxmi-11/awesome-on-device-ai&type=Date)](https://star-history.com/#shreelaxmi-11/awesome-on-device-ai&Date)
 
 > 🔒 **Every app in this repo runs locally. Your data stays yours.**
 
