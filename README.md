@@ -13,7 +13,7 @@
 
 # 🔒 Awesome On-Device AI
 
-<p><strong>50+ local AI apps you can actually run — no API keys, no cloud, no data leaving your machine.</strong><br/>
+<p><strong>Local AI apps you can actually run — no API keys, no cloud, no data leaving your machine.</strong><br/>
 Local LLMs · Private RAG · On-Device Voice AI · Local Agents · Edge Fine-tuning · Cross-Platform Inference</p>
 
 <p>
