@@ -120,7 +120,8 @@ def summarize(transcript: str, model, tokenizer) -> str:
         prompt = f"USER: {prompt_text}\nASSISTANT:"
 
     response = ""
-    for token in stream_generate(model, tokenizer, prompt=prompt, max_tokens=MAX_TOKENS):
+    for chunk in stream_generate(model, tokenizer, prompt=prompt, max_tokens=MAX_TOKENS):
+        token = chunk.text if hasattr(chunk, "text") else chunk
         print(token, end="", flush=True)
         response += token
     print()
