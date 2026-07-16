@@ -14,14 +14,14 @@ Turn bullet points, rough notes, or outlines into polished prose — locally. No
 Give it bullet points or rough notes. Get back a polished draft in seconds. Five modes: general writing, professional email, blog post, formal report, and rewrite/improve.
 
 ```
-Input (bullet points):
+Input (bullet points, --mode general):
 • Q2 revenue up 23% YoY
 • Main driver: enterprise contracts (3 new logos)
 • Churn decreased from 8% to 5.2%
 • Headcount grew from 47 to 61
 • Next quarter: investing in sales team, targeting 4 more enterprise logos
 
-Output (executive summary):
+Output:
 Q2 delivered strong results, with revenue growing 23% year-over-year driven
 primarily by enterprise expansion — we closed three new logos, bringing our
 enterprise base to a new high. Equally encouraging, churn fell from 8.0% to
@@ -47,7 +47,7 @@ python write.py
 ## Usage
 
 ```bash
-# Interactive mode (paste bullets, get a draft)
+# Interactive mode — paste bullets, get a draft
 python write.py
 
 # Draft a professional email
@@ -62,10 +62,10 @@ python write.py --mode report
 # Rewrite and improve existing text
 python write.py --mode rewrite
 
-# Load bullets from a file
+# Load notes from a file
 python write.py --input notes.txt --mode email
 
-# Save the output
+# Save the output to a file
 python write.py --mode blog --output post.md
 ```
 
@@ -76,20 +76,34 @@ python write.py --mode blog --output post.md
 | Mode | What it does |
 |------|-------------|
 | `general` | Transforms notes into clear, well-structured prose |
-| `email` | Drafts professional business emails |
+| `email` | Drafts professional business emails with subject line |
 | `blog` | Writes blog posts with a hook, body, and conclusion |
 | `report` | Creates formal reports with section headings |
 | `rewrite` | Rewrites existing text to be cleaner and more compelling |
 
 ---
 
+## How it works
+
+```
+Your bullet points or rough draft
+    → mode-specific system prompt (email style, blog structure, etc.)
+    → full input injected into LLM context
+    → MLX streams the polished output token by token
+    → optionally saved to --output file
+```
+
+No preprocessing. What streams out is the raw LLM output shaped by a carefully crafted mode-specific prompt.
+
+---
+
 ## Supported Models
 
-| Model | Size | Speed (M3 Pro) |
-|-------|------|----------------|
-| `mlx-community/Llama-3.2-3B-Instruct-4bit` | 1.7 GB | 61 tok/s |
-| `mlx-community/Mistral-7B-Instruct-v0.3-4bit` | 3.8 GB | 29 tok/s |
-| `mlx-community/Llama-3-8B-Instruct-4bit` | 4.9 GB | 28 tok/s |
+| Model | Size | Speed (M3 Pro) | Best for |
+|-------|------|----------------|----------|
+| `mlx-community/Llama-3.2-3B-Instruct-4bit` | 1.7 GB | 61 tok/s | Default — fast drafts |
+| `mlx-community/Mistral-7B-Instruct-v0.3-4bit` | 3.8 GB | 29 tok/s | Richer prose quality |
+| `mlx-community/Llama-3-8B-Instruct-4bit` | 4.9 GB | 28 tok/s | Best quality |
 
 ---
 

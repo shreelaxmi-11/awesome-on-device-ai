@@ -14,24 +14,28 @@ Load your bank statement or transaction CSV — get spending analysis, budget br
 Export your transactions from your bank (most banks let you download as CSV), then load them here for private AI-powered analysis.
 
 ```
+$ python analyze.py --csv transactions.csv
+
 💳 Spending Overview
 
-Total spending this period: $4,832.14 across 87 transactions
+Total spending: $4,832.14 across 87 transactions (March 2025)
 
-Top Categories:
-  1. Rent / Housing:     $2,200.00 (45.5%)
-  2. Groceries:          $612.40   (12.7%)
-  3. Dining:             $489.22   (10.1%)
-  4. Transport:          $218.90   (4.5%)
-  5. Subscriptions:      $187.00   (3.9%)
+Top Categories
+  1. Rent / Housing:     $2,200.00  (45.5%)
+  2. Groceries:            $612.40  (12.7%)
+  3. Dining:               $489.22  (10.1%)
+  4. Transport:            $218.90   (4.5%)
+  5. Subscriptions:        $187.00   (3.9%)
 
-Largest transactions:
-  • $2,200 — ACH Transfer / Rent (Mar 1)
-  • $412 — Apple One / Annual (Mar 3)
-  • $208 — Whole Foods (Mar 15)
+Largest Transactions
+  • $2,200  ACH Transfer — Landlord (Mar 1)
+  • $412    Apple — Annual subscription (Mar 3)
+  • $208    Whole Foods (Mar 15)
 
-Insight: Dining spend is 10% of income — industry benchmark is 5-8%.
-         You have 6 active streaming subscriptions totalling $89/month.
+Insights
+  ↑ Dining at 10.1% is above the recommended 5-8% of take-home pay.
+  📦 6 active streaming subscriptions totalling $89/month — consider auditing.
+  ✓ No duplicate charges detected.
 ```
 
 ---
@@ -62,21 +66,47 @@ python analyze.py --csv transactions.csv --mode chat
 
 | Mode | What it does |
 |------|-------------|
-| `overview` | Total spend, top categories, largest transactions, trends |
+| `overview` | Total spend, top categories, largest transactions, insights |
 | `budget` | Fixed vs variable, recurring payments, 50/30/20 breakdown |
 | `anomalies` | Unusual charges, duplicate transactions, suspicious patterns |
-| `chat` | Ask specific questions: "How much did I spend on food in March?" |
+| `chat` | Ask anything: "How much on food in March?" "Any charges over $500?" |
+
+---
+
+## How it works
+
+```
+Bank export CSV
+    → pandas: load with encoding fallback (utf-8 / latin-1 / cp1252)
+    → auto-detect amount, date, description columns from common bank formats
+    → compute statistical summary (totals, categories, outliers)
+    → summary + raw transaction table injected into LLM context
+    → MLX streams the analysis or answers in chat mode
+```
+
+Large CSVs (>300 rows) are sampled, but the full statistical summary is always computed so insights are accurate.
 
 ---
 
 ## CSV Format
 
-Works with any CSV that has amount, date, and description columns. Automatically detects column names from popular bank exports (Chase, Bank of America, YNAB, Mint, etc.).
+Works with any CSV that has amount, date, and description columns. Auto-detects column names from popular bank exports:
 
-**Example formats that work:**
-- Chase: `Transaction Date, Post Date, Description, Category, Type, Amount, Memo`
-- Bank of America: `Date, Description, Amount, Running Bal.`
-- Generic: `date, description, amount`
+| Bank | Column format |
+|------|--------------|
+| Chase | `Transaction Date, Description, Amount` |
+| Bank of America | `Date, Description, Amount, Running Bal.` |
+| YNAB | `Date, Payee, Category, Memo, Amount` |
+| Generic | `date, description, amount` (any order) |
+
+---
+
+## Supported Models
+
+| Model | Size | Speed (M3 Pro) | Best for |
+|-------|------|----------------|----------|
+| `mlx-community/Llama-3.2-3B-Instruct-4bit` | 1.7 GB | 61 tok/s | Default |
+| `mlx-community/Mistral-7B-Instruct-v0.3-4bit` | 3.8 GB | 29 tok/s | Better anomaly reasoning |
 
 ---
 
