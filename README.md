@@ -224,6 +224,23 @@ No API key. No internet. Your PDF, your machine, your answers.
 
 ---
 
+## 🛠️ How this was built
+
+This repo was built using **vibe coding** — AI-assisted development where I described what I wanted to build and iterated on the output, rather than writing every line from scratch.
+
+Every product decision was mine: which templates to build, why TF-IDF over a vector DB, two-pass LLM for meeting summarization, the MLX vs LiteRT-LM benchmark methodology. The real performance numbers (44.62 tok/s vs 2.81 tok/s) came from actual experiments on my M3 Pro — AI can't fake those.
+
+As a PM targeting on-device AI roles, I think vibe coding is a core skill — not a shortcut. It lets you:
+- **Ship a working prototype in hours**, not weeks, to validate an idea
+- **Stay hands-on with the stack** without needing to be a full-time engineer
+- **Evaluate AI output critically** — knowing when it's right, when it's wrong, and why
+
+Every template in this repo I can explain, demo, and defend technically. That's the bar.
+
+> All benchmark numbers are measured on real hardware. All PM documents reflect my own product thinking.
+
+---
+
 ## 🙏 Built by
 
 <p>Created and maintained by <a href="https://www.linkedin.com/in/shreelaxmi-ganesh/"><strong>Shreelaxmi Ganesh</strong></a> — PM in on-device AI, ex-Samsung Research (Galaxy AI · Patent WO2025/063733 · File Cache Reclamation for GenAI on Mobile NPUs).</p>
